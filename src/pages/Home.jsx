@@ -1,6 +1,7 @@
 import React from 'react'
 import Header from '../components/Header'
 import SpecialityMenu from '../components/SpecialityMenu'
+import TopDoctors from '../components/TopDoctors'
 
 function Home() {
     return (
@@ -10,6 +11,9 @@ function Home() {
             </div>
             <div className='border-b-[1px] border-black '>
                 <SpecialityMenu />
+            </div>
+            <div className='border-b-[1px] border-black '>
+                <TopDoctors />
             </div>
         </>
     )
