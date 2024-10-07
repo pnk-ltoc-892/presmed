@@ -9,3 +9,7 @@
 .active li{
     @apply text-primary
 }
+
+::-webkit-scrollbar{
+    @apply hidden
+}
