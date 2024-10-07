@@ -12,7 +12,7 @@ import Navbar from './components/Navbar'
 
 export default function App() {
   return (
-      <div className='bg-slate-200'>
+      <div className='bg-slate-900'>
           <div className='mx-4 sm:mx-[10%] bg-white'>
             <Navbar />
             <Routes>

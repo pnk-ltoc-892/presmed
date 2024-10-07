@@ -9,7 +9,7 @@ function Navbar() {
     const [token, setToken] = useState(true)
 
     return (
-        <div className='bg-slate-100 flex items-center justify-between text-sm py-4 px-1 mb-5 border-b border-b-gray-400'>
+        <div className='bg-slate-100 flex items-center justify-between text-sm py-4 px-1 border-b border-b-gray-400'>
             <img src={assets.logo} alt="Logo"
             className='w-28 cursor-pointer'
             />
