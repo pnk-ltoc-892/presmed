@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { assets } from '../assets/assets'
-import { NavLink, useNavigate } from 'react-router-dom'
+import { Link, NavLink, useNavigate } from 'react-router-dom'
 
 function Navbar() {
     const navigate = useNavigate()
@@ -10,9 +10,11 @@ function Navbar() {
 
     return (
         <div className='bg-slate-100 flex items-center justify-between text-sm py-4 px-1 border-b border-b-gray-400'>
-            <img src={assets.logo} alt="Logo"
-            className='w-28 cursor-pointer'
-            />
+            <Link to='/'>
+                <img src={assets.logo} alt="Logo"
+                className='w-28 cursor-pointer'
+                />
+            </Link>
             <ul className='hidden md:flex items-start gap-5 font-medium'>
                 <NavLink to='/'>
                     <li className='py-1'>Home</li>
