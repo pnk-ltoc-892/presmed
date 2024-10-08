@@ -56,7 +56,7 @@ function Doctors() {
                     {docFilter.map( (item, index) => (
                         <div key={index} 
                             className='border border-blue-200 rounded-xl overflow-hidden cursor-pointer hover:translate-y-[-10px] hover:scale-105 transition-all duration-300'
-                            onClick={() => navigate(`/appointment/${item._id}`)} 
+                            onClick={() => {navigate(`/appointment/${item._id}`); scrollTo(0,0);}}
                         >
                             <img src={item.image} alt="Doctor Image" 
                                 className='bg-blue-50 hover:bg-blue-100'

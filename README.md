@@ -12,3 +12,7 @@
 
 # Important Components
  - pages/Doctors.jsx
+ - Doctor Appointment Page
+
+# Important Possible Mistakes
+ - ## Consider All Edge Cases, Like User Entering Wrong Value, VAlue NOt Really Existing or error fetching the correct value
