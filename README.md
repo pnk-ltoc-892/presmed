@@ -9,3 +9,6 @@
     - Add The Dummy-Pages & Add the Routing 
     - Start with Making NavBar
 
+
+# Important Components
+ - pages/Doctors.jsx
