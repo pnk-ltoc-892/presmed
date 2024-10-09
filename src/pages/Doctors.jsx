@@ -9,6 +9,8 @@ function Doctors() {
 
     const { doctors } = useContext(AppContext)
 
+    const [showFilter, setShowFilter] = useState(false)
+
     const [docFilter, setDocFilter] = useState([])
     const applyFilter = () => {
         if(speciality){
@@ -28,7 +30,10 @@ function Doctors() {
         <div className='min-h-[60vh]'>
             <p className='text-center text-gray-600 m-8 '>Browse Doctors By Speciality</p>
             <div className='flex flex-col md:flex-row items-start gap-5 mt-5 mx-5'>
-                <div className='flex flex-col  gap-4 text-sm text-gray-700' >
+
+                <button className={`py-1 px-3 border rounded text-sm transition-all sm:hidden ${showFilter === true ? 'bg-primary text-white' : ''}`} onClick={() => setShowFilter(prev => !prev)} >Filters</button>
+
+                <div className={`flex flex-col gap-4 text-sm text-gray-700 ${showFilter === true ? '' : 'hidden'}`} >
                     <p className={`w-[94vw] sm:w-auto pl-3 py-2 pr-16 border border-gray-300 rounded transition-all cursor-pointer ${speciality === undefined ? 'bg-indigo-100 text-black' : ''}`}
                     onClick={() => navigate('/doctors')}
                     >All</p>
