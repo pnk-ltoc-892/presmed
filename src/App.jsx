@@ -11,10 +11,14 @@ import Appointment from './pages/Appointment'
 import Navbar from './components/Navbar'
 import { Footer } from './components/Footer'
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 export default function App() {
   return (
       <div className='bg-slate-900'>
           <div className='mx-4 sm:mx-[10%] bg-white'>
+            <ToastContainer />
             <Navbar />
               <Routes>
                 <Route path='/' element={<Home/>}/>

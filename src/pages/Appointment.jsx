@@ -104,7 +104,7 @@ function Appointment() {
                     </p>
                     <div className='flex items-center gap-2 text-sm mb-1 text-gray-600'>
                         <p>{doctor.degree} - {doctor.speciality}</p>
-                        <button className='py-1 px-2 border text-xs rounded-full'>{doctor.experience}</button>
+                        <button className='py-1 px-2 border text-xs rounded-full'>{doctor.experience} Years</button>
                     </div>
                     <div>
                         <p className='flex items-center gap-1 text-sm font-medium mt-3 text-gray-900'>About <img src={assets.info_icon} alt="" /></p>
@@ -112,7 +112,7 @@ function Appointment() {
                     </div>
 
                     <p className='text-gray-500 font-medium mt-7'>
-                        Appointment Fee: <span className='text-gray-600'>{currencySymbol} {doctor.fees}</span>
+                        Appointment Fee: <span className='text-gray-600'>{currencySymbol} {doctor.fee}</span>
                     </p>
                 </div>
             </div>
