@@ -1,12 +1,19 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { assets } from '../assets/assets'
 import { Link, NavLink, useNavigate } from 'react-router-dom'
+import { AppContext } from '../context/AppContext.jsx'
 
 function Navbar() {
     const navigate = useNavigate()
 
     const [showMenu, setShowMenu] = useState(false)
-    const [token, setToken] = useState(true)
+
+    const {userToken, setUserToken, backendUrl} = useContext(AppContext)
+
+    const logOut = () => {
+        setUserToken(false)
+        localStorage.removeItem('userToken')
+    }
 
     return (
         <div className='bg-slate-100 flex items-center justify-between text-sm py-4 px-1 border-b border-b-gray-400'>
@@ -36,7 +43,7 @@ function Navbar() {
 
             <div className='flex items-center gap-4'>
                 {
-                    token && <div className='flex items-center gap-3 cursor-pointer group relative'>
+                    userToken && <div className='flex items-center gap-3 cursor-pointer group relative'>
                                     {/* group relative - Help to create drop-down */}
                         <img src={assets.profile_pic} alt="Profile" 
                         className='w-8 rounded-full'
@@ -51,14 +58,14 @@ function Navbar() {
                                     className='hover:text-black cursor-pointer'>My Profile</p>
                                 <p onClick={() => navigate('/my-appointments')}
                                     className='hover:text-black cursor-pointer'>My Appointments</p>
-                                <p onClick={() => setToken(false)}
+                                <p onClick={logOut}
                                     className='hover:text-black cursor-pointer'>LogOut</p>
                             </div>
                         </div>
                     </div>
                 }
                 {
-                    !token && <button className='bg-primary text-white px-5 py-1 rounded-full font-light hidden md:block'
+                    !userToken && <button className='bg-primary text-white px-5 py-1 rounded-full font-light hidden md:block'
                     onClick={() => navigate('/login')}>
                     Create Account
                 </button>

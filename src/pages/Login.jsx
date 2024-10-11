@@ -1,18 +1,61 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { useContext } from 'react'
+import { AppContext } from '../context/AppContext.jsx'
+import axios from 'axios'
+import { toast, useToast } from 'react-toastify'
+import { useNavigate } from 'react-router-dom'
 
 function Login() {
     const [state, setState] = useState('Sign Up')
-
+    const navigate = useNavigate()
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [name, setName] = useState('')
 
+    const {userToken, setUserToken, backendUrl} = useContext(AppContext)
+
     const onSubmitHandler = async (event) => {
         event.preventDefault()
-        console.log(name);
-        console.log(email);
-        console.log(password);    
+        try {
+            if(state === 'Sign Up'){
+                const { data } = await axios.post(backendUrl + '/api/user/register', {email, name, password})
+                // console.log(data);
+                if(data.success){
+                    toast.success('Sign Up Success')
+                    setUserToken(data.token)
+                    localStorage.setItem('userToken', data.token)
+                    // navigate('/')
+                }
+                else{
+                    toast.error(data.message)
+                }
+            }
+            else{
+                const { data } = await axios.post(backendUrl + '/api/user/login', {email, password}, {headers: {token: userToken}})
+                if(data.success){
+                    toast.success('Sign Up Success')
+                    setUserToken(data.token)
+                    localStorage.setItem('userToken', data.token)
+                }
+                else{
+                    toast.error(data.message)
+                }
+            }
+        } catch (error) {
+            console.log("Error While SignUp / SignIn: ", error);
+            toast.error(error)
+        }
     }
+
+    useEffect(() => {
+        if(userToken){
+            navigate('/')
+        }
+        else{
+            navigate('/login')
+        }
+    }, [userToken])
+    
 
     return (
         <form onSubmit={onSubmitHandler} className='min-h-[80vh] flex items-center'>

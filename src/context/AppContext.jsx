@@ -10,7 +10,7 @@ const AppContextProvider = ({children}) => {
 
     const [doctors, setDoctors] = useState([])
 
-    
+
     const getAllDoctors = async () => {
         try {
             const { data } = await axios.get(backendUrl + '/api/doctor/list')
@@ -26,19 +26,22 @@ const AppContextProvider = ({children}) => {
             toast.error(error.message)
         }
     }
-
     useEffect(() => {
         getAllDoctors()
     }, [])
     
 
-
+    const [userToken, setUserToken] = useState(localStorage.getItem('userToken') ? localStorage.getItem('userToken') : false)
 
 
     const currencySymbol = '$'
+    
     const value = {
         doctors,
-        currencySymbol
+        currencySymbol,
+        userToken,
+        setUserToken,
+        backendUrl
     }
 
     return <AppContext.Provider value={value}>
