@@ -8,7 +8,7 @@ function Navbar() {
 
     const [showMenu, setShowMenu] = useState(false)
 
-    const {userToken, setUserToken, backendUrl} = useContext(AppContext)
+    const {userToken, setUserToken, backendUrl, userData} = useContext(AppContext)
 
     const logOut = () => {
         setUserToken(false)
@@ -43,9 +43,9 @@ function Navbar() {
 
             <div className='flex items-center gap-4'>
                 {
-                    userToken && <div className='flex items-center gap-3 cursor-pointer group relative'>
+                    userToken && userData && <div className='flex items-center gap-3 cursor-pointer group relative'>
                                     {/* group relative - Help to create drop-down */}
-                        <img src={assets.profile_pic} alt="Profile" 
+                        <img src={userData.image} alt="Profile" 
                         className='w-8 rounded-full'
                         />
                         <img src={assets.dropdown_icon} alt="Profile" 
