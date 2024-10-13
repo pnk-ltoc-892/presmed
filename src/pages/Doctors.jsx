@@ -5,7 +5,7 @@ import { AppContext } from '../context/AppContext'
 function Doctors() {
     const param = useParams()
     const speciality = param.speciality
-    console.log(speciality);
+    // console.log(speciality);
 
     const { doctors } = useContext(AppContext)
 
