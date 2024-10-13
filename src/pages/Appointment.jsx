@@ -15,8 +15,12 @@ function Appointment() {
     const [doctor, setDoctor] = useState({})
     const fetchDoctorInfo = () => {
         const docInfo = (doctors.find( doc => doc._id === doctorid ))
-        setDoctor(docInfo)
+        setDoctor(prev => docInfo)
+        // console.log(docInfo);
     }
+    // console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+    //             console.log(doctor);
+    // console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
     
     const daysOfWeek = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT']
     // ! State Variables to store Appointment Date
@@ -54,12 +58,23 @@ function Appointment() {
             while(currentDate < endTime){
                 let formattedTime = currentDate.toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'})
 
-                // Add slot to array
-                timeSlots.push({
-                    dateTime: new Date(currentDate),
-                    time: formattedTime
-                })
+                let day = currentDate.getDate()
+                let month = currentDate.getMonth() + 1
+                let year = currentDate.getFullYear()
 
+                const slotDate = String(day) + "_" + String(month) + "_" + String(year)
+                
+                const slotTime = formattedTime
+                
+                // const isSlotAvailble = doctor.slotsBooked[slotDate] && doctor.slotsBooked[slotDate]?.includes(slotTime) ? false : true 
+                let isSlotAvailble = true
+                // Add slot to array if slot available
+                if(isSlotAvailble){
+                    timeSlots.push({
+                        dateTime: new Date(currentDate),
+                        time: formattedTime
+                    })
+                }
                 // Increment current Time by 30 minute
                 currentDate.setMinutes(currentDate.getMinutes() + 30)
             }
@@ -73,6 +88,7 @@ function Appointment() {
 
     useEffect(() => {
         getAvailableSlots()
+        console.log(doctor);
     }, [doctor]) // Dependency Not Needed Really ?
 
     // useEffect( () => {
@@ -109,7 +125,7 @@ function Appointment() {
             if(data.success){
                 toast.success(data.message)
                 getAllDoctors() // ! Re-Fetch Doctors Data, With Updated Slots
-                navigate('my-appointments')
+                navigate('/my-appointments')
             }
             else{
                 toast.error(data.message)
@@ -160,7 +176,7 @@ function Appointment() {
                 </div>
             </div>
             
-            {/* Booking Slots */}
+            {/* // ! Booking Slots */}
             <div className='sm:ml-72 sm:pl-4 font-medium text-gray-700' >
                 <p>Booking Slots</p>
                 <div className='flex gap-3 items-center w-full overflow-x-scroll mt-4' >
@@ -180,6 +196,10 @@ function Appointment() {
                 <div className='flex gap-3 items-center w-full overflow-x-scroll mt-4' >
                     {
                         docSlots.length && docSlots[slotIndex].map( (item, index) => (
+                            
+                            // !doctor.slotsBooked[String(docSlots[slotIndex][0].dateTime.getDate()) + "_" + String(docSlots[slotIndex][0].dateTime.getMonth() + 1) + "_" + String(docSlots[slotIndex][0].dateTime.getFullYear())].includes(item.time)
+                            
+                            // && 
                             <p key={index} 
                                 className={`text-sm font-light flex-shrink-0 px-5 py-2 rounded-full cursor-pointer ${item.time === slotTime ? 'bg-primary text-white': 'border border-gray-400'}` }
                                 onClick={() => setSlotTime(item.time)}
