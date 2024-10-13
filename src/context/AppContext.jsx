@@ -64,7 +64,7 @@ const AppContextProvider = ({children}) => {
     // ! Values Passed onto the Context
     
     const value = {
-        doctors,
+        doctors, getAllDoctors,
         currencySymbol,
         userToken,
         setUserToken,
