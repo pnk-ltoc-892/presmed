@@ -53,6 +53,41 @@ function MyAppointments() {
         }
     }
 
+    const makeAppointmentPayement = async (appointmentId) => {
+        try {
+            const { data } = await axios.post(backendUrl + '/api/user/payement-appointment',{appointmentId} , {headers: {token: userToken}})
+            if(data.success){
+                toast.success(data.message)
+                verifyAppointmentPayement(appointmentId)
+            }
+            else{
+                toast.error(data.message)
+            }
+        } 
+        catch (error) {
+            console.log("Error While Making Appointment: ", error);
+            toast.error(error.message)
+        }
+    }
+
+    const verifyAppointmentPayement = async (appointmentId) => {
+        try {
+            const razorPayOrderId = {}
+            const { data } = await axios.post(backendUrl + '/api/user/verify-payement',{razorPayOrderId, appointmentId} , {headers: {token: userToken}})
+            if(data.success){
+                toast.success(data.message)
+                getAppointments()
+                navigate('/my-appointments')
+            }
+            else{
+                toast.error(data.message)
+            }
+        } 
+        catch (error) {
+            console.log("Error While Making Appointment: ", error);
+            toast.error(error.message)
+        }
+    }
 
 
     useEffect( () => {
@@ -96,7 +131,11 @@ function MyAppointments() {
                             <div className='flex flex-col justify-end'>
                                 <div className='flex flex-col gap-2 justify-end'>
                                     {
-                                        !item.cancel && <button className='text-sm text-stone-500 text-center sm:min-w-48 py-2 border rounded hover:bg-primary hover:text-white transition-all duration-200'>Pay Online</button>
+                                        // ! Fix This Issue
+                                        (item.cancel && !item.payment) 
+                                        ? <button onClick={()=>makeAppointmentPayement(item._id)}
+                                        className='text-sm text-stone-500 text-center sm:min-w-48 py-2 border rounded hover:bg-primary hover:text-white transition-all duration-200'>Pay Online</button>
+                                        : <button className='text-sm text-white text-center sm:min-w-48 py-2 border rounded bg-green-500 hover:text-white transition-all duration-200'>Paid</button>
                                     }
                                     
                                     {
