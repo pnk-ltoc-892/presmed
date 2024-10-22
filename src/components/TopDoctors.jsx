@@ -25,8 +25,8 @@ const TopDoctors = () => {
                             className='bg-blue-50 hover:bg-blue-100'
                         />
                         <div className='p-4' > 
-                            <div className='flex items-center gap-2 text-sm text-center text-green-700'>
-                                <p className='w-2 h-2 bg-green-700 rounded-full'></p><p>Available</p>
+                            <div className={`flex items-center gap-2 text-sm text-center ${item.available ?  "text-green-700" : "text-red-700"} `}>
+                                <p className={`w-2 h-2 ${item.available ?  "bg-green-700" : "bg-red-700 text-red-700"} rounded-full`}></p><p>{item.available ? 'Available' : 'Not Available'}</p>
                             </div>
                             <p className='text-gray-900 text-lg font-medium' >{item.name}</p>
                             <p className='text-gray-600 text-sm' >{item.speciality}</p>

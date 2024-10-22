@@ -132,7 +132,8 @@ function MyAppointments() {
                                 <div className='flex flex-col gap-2 justify-end'>
                                     {
                                         // ! Fix This Issue
-                                        (item.cancel && !item.payment) 
+                                        // ! If Completed Then Remove, Cancelled And PAid Options
+                                        (item.cancel && !item.payment && !item.isCompleted) 
                                         ? <button onClick={()=>makeAppointmentPayement(item._id)}
                                         className='text-sm text-stone-500 text-center sm:min-w-48 py-2 border rounded hover:bg-primary hover:text-white transition-all duration-200'>Pay Online</button>
                                         : <button className='text-sm text-white text-center sm:min-w-48 py-2 border rounded bg-green-500 hover:text-white transition-all duration-200'>Paid</button>

@@ -31,9 +31,10 @@ function Doctors() {
             <p className='text-center text-gray-600 m-8 '>Browse Doctors By Speciality</p>
             <div className='flex flex-col md:flex-row items-start gap-5 mt-5 mx-5'>
 
+// Needs Fix
                 <button className={`py-1 px-3 border rounded text-sm transition-all sm:hidden ${showFilter === true ? 'bg-primary text-white' : ''}`} onClick={() => setShowFilter(prev => !prev)} >Filters</button>
 
-                <div className={`flex flex-col gap-4 text-sm text-gray-700 ${showFilter === true ? '' : 'hidden'}`} >
+                <div className={`flex flex-col gap-4 text-sm text-gray-700 `} >
                     <p className={`w-[94vw] sm:w-auto pl-3 py-2 pr-16 border border-gray-300 rounded transition-all cursor-pointer ${speciality === undefined ? 'bg-indigo-100 text-black' : ''}`}
                     onClick={() => navigate('/doctors')}
                     >All</p>
@@ -67,8 +68,8 @@ function Doctors() {
                                 className='bg-blue-50 hover:bg-blue-100'
                             />
                             <div className='p-4' > 
-                                <div className='flex items-center gap-2 text-sm text-center text-green-700'>
-                                    <p className='w-2 h-2 bg-green-700 rounded-full'></p><p>Available</p>
+                                <div className={`flex items-center gap-2 text-sm text-center ${item.available ?  "text-green-700" : "text-red-700"} `}>
+                                    <p className={`w-2 h-2 ${item.available ? 'bg-green-700' : 'bg-red-700'} bg-green-700 rounded-full`}></p><p>{item.available ? 'Available' : 'Not Available'}</p>
                                 </div>
                                 <p className='text-gray-900 text-lg font-medium' >{item.name}</p>
                                 <p className='text-gray-600 text-sm' >{item.speciality}</p>
